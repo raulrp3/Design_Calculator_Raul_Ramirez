@@ -3,8 +3,53 @@
 <head>
 	<meta charset="UTF-8">
 	<title>CALCULADORA - Raúl Ramírez</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <body>
-	
+	<div class="container bg-dark rounded mt-2 p-3">
+		<div class="container">
+			<h1 class="text-center text-light">CALCULADORA ESTECH</h1>
+		</div>
+		<div id="calculator" class="container">
+			<div class="row">
+				<input type="text" id="screen" class="col-xs-12 text-right form-control w-50 container" readonly="true">
+			</div>
+		</div>
+		<div id="operations" class="container">
+				<div class="row mt-3">
+					<button type="button" class="btn btn-lg btn-danger col mr-2 ml-2" name="DEL">DEL</button>
+					<button type="button" class="btn btn-lg btn-danger col mr-2 ml-2" name="AC">AC</button>
+					<button type="button" class="btn btn-lg btn-warning col mr-2 ml-2 text-white" name="+">+</button>
+				</div>
+				<div class="row mt-3">
+					<button type="button" class="btn btn-lg btn-warning col mr-2 ml-2 text-white" name="-">-</button>
+					<button type="button" class="btn btn-lg btn-warning col mr-2 ml-2 text-white" name="*">X</button>
+					<button type="button" class="btn btn-lg btn-warning col mr-2 ml-2 text-white" name="/">/</button>
+				</div>
+			</div>
+		<div id="buttons" class="container">
+			<div class="row mt-3">
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="7">7</button>
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="8">8</button>
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="9">9</button>
+			</div>
+			<div class="row mt-3">
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="6">6</button>
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="5">5</button>
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="4">4</button>
+			</div>
+			<div class="row mt-3">
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="3">3</button>
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="2">2</button>
+				<button type="button" class="btn btn-lg btn-light col mr-2 ml-2" name="1">1</button>
+			</div>
+			<div class="row mt-3">
+				<button type="button" class="btn btn-lg-block btn-success col mr-2 ml-2" id="same">=</button>
+			</div>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
