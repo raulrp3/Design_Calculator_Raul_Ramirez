@@ -50,6 +50,7 @@ function showOperation(screen){
 			firstNumber = 0;
 			secondNumber = 0;
 			operation = "";
+			screen.value = "";
 		}
 		break;
 		case ".":{
@@ -67,8 +68,31 @@ function showOperation(screen){
 }
 function calculate(screen){
 	secondNumber = screen.value;
+	var result = 0;
 	if (isDecimal){
 		firstNumber = parseFloat(firstNumber);
 		secondNumber = parseFloat(secondNumber);
+	}else{
+		firstNumber = parseInt(firstNumber);
+		secondNumber = parseInt(secondNumber);
 	}
+	switch (operation){
+		case "+":{
+			result = firstNumber + secondNumber;
+		}
+		break;
+		case "-":{
+			result = firstNumber - secondNumber;
+		}
+		break;
+		case "*":{
+			result = firstNumber * secondNumber;
+		}
+		break;
+		case "/":{
+			result = firstNumber / secondNumber;
+		}
+		break;
+	}
+	screen.value = result;
 }
