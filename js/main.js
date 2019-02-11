@@ -1,20 +1,26 @@
-var divPn = "",firstNumber = 0,secondNumber = 0,operation = "",isDecimal = false;;
+var firstNumber = 0,secondNumber = 0,operation = "",isDecimal = false;;
 window.onload = function(){
 	var screen = document.getElementById("screen");
 	var divAdvanced = document.getElementById("pnAdvanced");
-	//var divConversion = document.getElementById("pnConversion");
+	var divMonetary = document.getElementById("pnMonetary");
+	var divNumeric = document.getElementById("pnNumeric")
+	var divNumericButtons = document.getElementById("pnNumericButtons")
 	var normal = document.getElementById("normal");
 	var advanced = document.getElementById("advanced");
-	//var conversion = document.getElementById("conversion");
+	var conversionMonetary = document.getElementById("monetary");
+	var conversionNumerical = document.getElementById("numerical");
 	var numbers = document.getElementById("buttons").getElementsByTagName("button");
 	var operations = document.getElementById("operations").getElementsByTagName("button");
 	var same = document.getElementById("same");
-	divAdvanced.style.display = "none";	
-	//divConversion.style.display = "none";
+	divAdvanced.style.display = "none";
+	divMonetary.style.display = "none";
+	divNumeric.style.display = "none";
+	divNumericButtons.style.display = "none";
 	normal.style.visibility = "hidden";
-	normal.addEventListener("click",function(){showNormal()});
+	normal.addEventListener("click",function(){showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary)});
 	advanced.addEventListener("click",function(){showAdvanced(divAdvanced,normal)});
-	//conversion.addEventListener("click",function(){showConversion(divConversion,normal)});
+	conversionMonetary.addEventListener("click",function(){showMonetary(divMonetary,normal)});
+	conversionNumerical.addEventListener("click",function(){showNumerical(divNumeric,divNumericButtons,normal)});
 	for (var i = 0;i < numbers.length;i++){
 		numbers[i].addEventListener("click",function(){showNumber(screen)});
 	}
@@ -23,24 +29,33 @@ window.onload = function(){
 	}
 	same.addEventListener("click",function(){calculate(screen)});
 }
-function showNormal(){
-	document.getElementById(divPn).style.display = "none";
+function showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary){
+	divAdvanced.style.display = "none";
+	divNumeric.style.display = "none";
+	divNumericButtons.style.display = "none";
+	divMonetary.style.display = "none";
 	document.getElementById(event.target.id).style.visibility = "hidden";
 }
 function showAdvanced(divAdvanced,normal){
 	if (divAdvanced.style.display == "none"){
 		divAdvanced.style.display = "block";
 		normal.style.visibility = "visible";
-		divPn = divAdvanced.id;
 	}
 }
-/*function showConversion(divConversion,normal){
-	if (divConversion.style.display == "none"){
-		divConversion.style.display = "block";
+function showMonetary(divMonetary,normal){
+	if (divMonetary.style.display == "none"){
+		divMonetary.style.display = "block";
 		normal.style.visibility = "visible";
-		divPn = divConversion.id;
 	}
-}*/
+}
+function showNumerical(divNumeric,divNumericButtons,normal){
+	if (divNumeric.style.display == "none" && divNumericButtons.style.display == "none"){
+		divNumeric.style.display = "block";
+		divNumericButtons.style.display = "block";
+		normal.style.visibility = "visible";
+		isConversion = true;
+	}
+}
 function showNumber(screen){
 	screen.value += event.target.name;
 }
@@ -96,7 +111,7 @@ function calculate(screen){
 		case "sqrt":{
 			/*
 			firstNumber es el número al que queremos realiza la raíz.
-			secondNumber es el exponen te la raíz.
+			secondNumber es el exponente de la raíz.
 			*/
 			result = Math.pow(firstNumber, (1 / secondNumber));
 		}
