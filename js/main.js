@@ -93,6 +93,17 @@ function calculate(screen){
 			result = firstNumber / secondNumber;
 		}
 		break;
+		case "sqrt":{
+			/*
+			firstNumber es el número al que queremos realiza la raíz.
+			secondNumber es el exponen te la raíz.
+			*/
+			result = Math.pow(firstNumber, (1 / secondNumber));
+		}
+		break;
+		case "pot":{
+			result = Math.pow(firstNumber,secondNumber);
+		}
 	}
 	screen.value = result;
 }
