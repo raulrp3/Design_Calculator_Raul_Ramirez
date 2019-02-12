@@ -1,4 +1,4 @@
-var firstNumber = 0,secondNumber = 0,operation = "",isDecimal = false;;
+var firstNumber = 0,secondNumber = 0,operation = "",isDecimal = false,isConversion = false;
 window.onload = function(){
 	var screen = document.getElementById("screen");
 	var divAdvanced = document.getElementById("pnAdvanced");
@@ -12,6 +12,10 @@ window.onload = function(){
 	var numbers = document.getElementById("buttons").getElementsByTagName("button");
 	var operations = document.getElementById("operations").getElementsByTagName("button");
 	var same = document.getElementById("same");
+	var inputLibra = document.getElementById("libra");
+	var inputDollar = document.getElementById("dollar");
+	var inputDollarMex = document.getElementById("dollarMex");
+	var inputYen = document.getElementById("yen");
 	divAdvanced.style.display = "none";
 	divMonetary.style.display = "none";
 	divNumeric.style.display = "none";
@@ -25,9 +29,9 @@ window.onload = function(){
 		numbers[i].addEventListener("click",function(){showNumber(screen)});
 	}
 	for (var i = 0;i < operations.length;i++){
-		operations[i].addEventListener("click",function(){showOperation(screen)});
+		operations[i].addEventListener("click",function(){showOperation(screen,inputLibra,inputDollar,inputDollarMex,inputYen)});
 	}
-	same.addEventListener("click",function(){calculate(screen)});
+	same.addEventListener("click",function(){calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen)});
 }
 function showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary){
 	divAdvanced.style.display = "none";
@@ -35,6 +39,7 @@ function showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary){
 	divNumericButtons.style.display = "none";
 	divMonetary.style.display = "none";
 	document.getElementById(event.target.id).style.visibility = "hidden";
+	isConversion = false;
 }
 function showAdvanced(divAdvanced,normal){
 	if (divAdvanced.style.display == "none"){
@@ -43,6 +48,7 @@ function showAdvanced(divAdvanced,normal){
 	}
 }
 function showMonetary(divMonetary,normal){
+	isConversion = true;
 	if (divMonetary.style.display == "none"){
 		divMonetary.style.display = "block";
 		normal.style.visibility = "visible";
@@ -59,13 +65,10 @@ function showNumerical(divNumeric,divNumericButtons,normal){
 function showNumber(screen){
 	screen.value += event.target.name;
 }
-function showOperation(screen){
+function showOperation(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
 	switch (event.target.name){
 		case "AC":{
-			firstNumber = 0;
-			secondNumber = 0;
-			operation = "";
-			screen.value = "";
+			allClear(screen,inputLibra,inputDollar,inputDollarMex,inputYen);
 		}
 		break;
 		case ".":{
@@ -81,7 +84,15 @@ function showOperation(screen){
 		break;
 	}
 }
-function calculate(screen){
+function calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
+	if (isConversion){
+		calculateConversion(screen,inputLibra,inputDollar,inputDollarMex,inputYen);
+		isConversion = false;
+	}else{
+		calculateOperation(screen);
+	}
+}
+function calculateOperation(screen){
 	secondNumber = screen.value;
 	var result = 0;
 	if (isDecimal){
@@ -121,4 +132,38 @@ function calculate(screen){
 		}
 	}
 	screen.value = result;
+}
+function calculateConversion(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
+	var euros = 0;
+	if (isDecimal){
+		euros = parseFloat(screen.value);
+	}else{
+		euros = parseInt(screen.value);
+	}
+	inputLibra.value = conversionEurosLibras(euros);
+	inputDollar.value = conversionEurosDollar(euros);
+	inputDollarMex.value = conversionEurosPesos(euros);
+	inputYen.value = conversionEurosYen(euros);
+}
+function conversionEurosLibras(euros){
+	return euros * 0.88;
+}
+function conversionEurosDollar(euros){
+	return euros * 1.13;
+}
+function conversionEurosPesos(euros){
+	return euros * 21.79;
+}
+function conversionEurosYen(euros){
+	return euros * 125.07;
+}
+function allClear(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
+	firstNumber = "";
+	secondNumber = "";
+	operation = "";
+	screen.value = "";
+	inputLibra.value = "";
+	inputDollar.value = "";
+	inputDollarMex.value = "";
+	inputYen.value = "";
 }
