@@ -31,7 +31,7 @@ window.onload = function(){
 	for (var i = 0;i < operations.length;i++){
 		operations[i].addEventListener("click",function(){showOperation(screen,inputLibra,inputDollar,inputDollarMex,inputYen)});
 	}
-	same.addEventListener("click",function(){calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen)});
+	same.addEventListener("click",function(){calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen,divMonetary)});
 }
 function showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary){
 	divAdvanced.style.display = "none";
@@ -84,8 +84,8 @@ function showOperation(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
 		break;
 	}
 }
-function calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
-	if (isConversion){
+function calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen,divMonetary){
+	if (isConversion || divMonetary.style.display == "block"){
 		calculateConversion(screen,inputLibra,inputDollar,inputDollarMex,inputYen);
 		isConversion = false;
 	}else{
@@ -140,10 +140,10 @@ function calculateConversion(screen,inputLibra,inputDollar,inputDollarMex,inputY
 	}else{
 		euros = parseInt(screen.value);
 	}
-	inputLibra.value = conversionEurosLibras(euros);
-	inputDollar.value = conversionEurosDollar(euros);
-	inputDollarMex.value = conversionEurosPesos(euros);
-	inputYen.value = conversionEurosYen(euros);
+	inputLibra.value = conversionEurosLibras(euros) + " £";
+	inputDollar.value = conversionEurosDollar(euros) + " $";
+	inputDollarMex.value = conversionEurosPesos(euros) + " $MEX";
+	inputYen.value = conversionEurosYen(euros) + " ¥";
 }
 function conversionEurosLibras(euros){
 	return euros * 0.88;
