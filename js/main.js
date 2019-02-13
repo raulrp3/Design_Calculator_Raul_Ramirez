@@ -19,6 +19,7 @@ window.onload = function(){
 	var inputYen = document.getElementById("yen");
 	var decimal = document.getElementById("decimal");
 	var hexadecimal = document.getElementById("hexadecimal");
+	var binary = document.getElementById("binary");
 	divAdvanced.style.display = "none";
 	divMonetary.style.display = "none";
 	divNumeric.style.display = "none";
@@ -37,6 +38,7 @@ window.onload = function(){
 	same.addEventListener("click",function(){calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen,divMonetary)});
 	decimal.addEventListener("click",function(){conversionDecimal(screen)});
 	hexadecimal.addEventListener("click",function(){conversionHexadecimal(screen)});
+	binary.addEventListener("click",function(){conversionBinary(screen)});
 }
 function showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary){
 	divAdvanced.style.display = "none";
@@ -173,6 +175,13 @@ function conversionHexadecimal(screen){
 		screen.value = conversion(firstNumber,2,16);
 	}else{
 		screen.value = conversion(firstNumber,10,16);
+	}
+}
+function conversionBinary(screen){
+	if (isNumberHexadecimal(firstNumber)){
+		screen.value = conversion(firstNumber,16,2);
+	}else{
+		screen.value = conversion(firstNumber,10,2);
 	}
 }
 function conversion(number,base,to){
