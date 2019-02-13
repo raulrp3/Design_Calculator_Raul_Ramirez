@@ -1,4 +1,5 @@
 var firstNumber = 0,secondNumber = 0,operation = "",isDecimal = false,isConversion = false;
+var reHexadecimal = /^[1-9a-f]*$/,reBinary = /^[0-1]*$/;
 window.onload = function(){
 	var screen = document.getElementById("screen");
 	var divAdvanced = document.getElementById("pnAdvanced");
@@ -16,6 +17,8 @@ window.onload = function(){
 	var inputDollar = document.getElementById("dollar");
 	var inputDollarMex = document.getElementById("dollarMex");
 	var inputYen = document.getElementById("yen");
+	var decimal = document.getElementById("decimal");
+	var hexadecimal = document.getElementById("hexadecimal");
 	divAdvanced.style.display = "none";
 	divMonetary.style.display = "none";
 	divNumeric.style.display = "none";
@@ -32,13 +35,15 @@ window.onload = function(){
 		operations[i].addEventListener("click",function(){showOperation(screen,inputLibra,inputDollar,inputDollarMex,inputYen)});
 	}
 	same.addEventListener("click",function(){calculate(screen,inputLibra,inputDollar,inputDollarMex,inputYen,divMonetary)});
+	decimal.addEventListener("click",function(){conversionDecimal(screen)});
+	hexadecimal.addEventListener("click",function(){conversionHexadecimal(screen)});
 }
 function showNormal(divAdvanced,divNumeric,divNumericButtons,divMonetary){
 	divAdvanced.style.display = "none";
 	divNumeric.style.display = "none";
 	divNumericButtons.style.display = "none";
 	divMonetary.style.display = "none";
-	document.getElementById(event.target.id).style.visibility = "hidden";
+	event.target.style.visibility = "hidden";
 	isConversion = false;
 }
 function showAdvanced(divAdvanced,normal){
@@ -59,7 +64,6 @@ function showNumerical(divNumeric,divNumericButtons,normal){
 		divNumeric.style.display = "block";
 		divNumericButtons.style.display = "block";
 		normal.style.visibility = "visible";
-		isConversion = true;
 	}
 }
 function showNumber(screen){
@@ -156,6 +160,29 @@ function conversionEurosPesos(euros){
 }
 function conversionEurosYen(euros){
 	return euros * 125.07;
+}
+function conversionDecimal(screen){
+	if (isNumberBinary(firstNumber)){
+		screen.value = conversion(firstNumber,2,10);
+	}else{
+		screen.value = conversion(firstNumber,16,10);
+	}
+}
+function conversionHexadecimal(screen){
+	if (isNumberBinary(firstNumber)){
+		screen.value = conversion(firstNumber,2,16);
+	}else{
+		screen.value = conversion(firstNumber,10,16);
+	}
+}
+function conversion(number,base,to){
+	return parseInt(number,base).toString(to);
+}
+function isNumberBinary(number){
+	return reBinary.test(number);
+}
+function isNumberHexadecimal(number){
+	return reHexadecimal.test(number);
 }
 function allClear(screen,inputLibra,inputDollar,inputDollarMex,inputYen){
 	firstNumber = "";
