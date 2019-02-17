@@ -1,5 +1,16 @@
 var firstNumber = 0,secondNumber = 0,operation = "",isDecimal = false,isConversion = false;
 var reHexadecimal = /^[1-9a-f]*$/,reBinary = /^[0-1]*$/;
+/*
+	Calculadora estándar: realiza operaciones(+,-,*,/) y permite realizar operacion con números decimales
+	Calculadora avanzada: para que se muestre esta opción hay que pulsar sobre el botón Avanzada, en este apartado se pueden
+	realizar operaciones como raíces y potencias.
+	Calculadora conversión: para que se muestre esta opción debemos seleccionr el desplegable Conversión,en el podemos elegir
+	la conversión de monesa y la conversión numérica.
+		Conversión de moneda: se le da un número de euros y calcula su equivalencia a la monedas que aparecen(libra,dolar,peso mexicano,yen).
+		Para que se haga la conversión hay que pulsar el símbolo =.
+		Conversión numérica: se le da un número(binario,hexadecimal o decimal) y se pulsa el botón de la conversión que queramos
+		realizar(binario,hexadecimal,decimal).
+*/
 window.onload = function(){
 	var screen = document.getElementById("screen");
 	var divAdvanced = document.getElementById("pnAdvanced");
